@@ -188,9 +188,9 @@ collections:
     output: true
     permalink: /:collection/:path/
     
-# Theme
+# Theme (none of these work, i know we added some manually in skins but can't find any way to use the ones we added...)
 # theme: "slate"
-theme: slate
+# theme: slate
 
 # plugins:
 #   - jekyll-remote-theme
