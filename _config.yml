@@ -83,9 +83,9 @@ analytics:
 author:
   name             : "Jordan Benjamin"
   avatar           : "profile.png"
-  bio              : "Your biography for the left-hand sidebar"
+  bio              : "PhD Student @ Caltech Environmental Science & Engineering"
   location         : "Location"
-  employer         :
+  employer         : " California Institute of Technology"
   pubmed           : "https://www.ncbi.nlm.nih.gov/pubmed/?term=john+snow"
   googlescholar    : "http://yourfullgooglescholarurl.com"
   email            :
