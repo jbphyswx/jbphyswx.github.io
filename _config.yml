@@ -7,10 +7,10 @@
 
 # Site Settings
 locale                   : "en-US"
-title                    : "Your Name / Jordan's site"
+title                    : Jordan Benjamin / Jordan's site"
 title_separator          : "-"
-name                     : &name "Your Name"
-description              : &description "personal description"
+name                     : &name "Jordan Benjamin"
+description              : &description "PhD Student & Climate Scientist"
 url                      : https://jbphyswx.github.io # the base hostname & protocol for your site e.g. "https://mmistakes.github.io"
 baseurl                  : "" # the subpath of your site, e.g. "/blog"
 repository               : "jbphyswx/jbphyswx.github.io"
@@ -82,7 +82,7 @@ analytics:
 # Site Author
 author:
   name             : "Jordan Benjamin"
-  avatar           : "profile.png"
+  avatar           : "images/profile.png"
   bio              : "PhD Student @ Caltech Environmental Science & Engineering"
   location         : "Pasadena, CA"
   employer         : " California Institute of Technology"

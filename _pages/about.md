@@ -13,10 +13,14 @@ Stay tuned...
 
 About Me
 ======
-1. List 1
-1. List 2
+I'm interested in 
+1. Climate Modeling & Change
+1. Upper Ocean Turbulence
+1. Climate Data Science & Risk Analysis
+1. Machine Learning
+1. Data-informed modeling methods
 
 
 Notes
 ------
-TBD
+This site will be updated soon!
