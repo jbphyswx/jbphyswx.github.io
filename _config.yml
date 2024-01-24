@@ -58,7 +58,7 @@ yandex_site_verification :
 
 # Social Sharing
 twitter:
-  username               : &twitter
+  username               : &JBstormz
 facebook:
   username               :
   app_id                 :
@@ -84,7 +84,7 @@ author:
   name             : "Jordan Benjamin"
   avatar           : "profile.png"
   bio              : "PhD Student @ Caltech Environmental Science & Engineering"
-  location         : "Location"
+  location         : "Pasadena, CA"
   employer         : " California Institute of Technology"
   pubmed           : "https://www.ncbi.nlm.nih.gov/pubmed/?term=john+snow"
   googlescholar    : "http://yourfullgooglescholarurl.com"

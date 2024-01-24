@@ -1,5 +1,5 @@
 ---
-permalink: /
+permalink: /instructions/
 title: "Jordan Benjamin's Personal Site"
 excerpt: "About me"
 author_profile: true
