@@ -82,7 +82,7 @@ analytics:
 # Site Author
 author:
   name             : "Jordan Benjamin"
-  avatar           : "images/profile.png"
+  avatar           : "profile.png"
   bio              : "PhD Student @ Caltech Environmental Science & Engineering"
   location         : "Pasadena, CA"
   employer         : " California Institute of Technology"
