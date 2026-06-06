@@ -9,8 +9,9 @@ main:
   - title: "Teaching"
     url: /teaching/    
     
-  - title: "Portfolio"
-    url: /portfolio/
+  - title: "Software"
+    url: /software/
+    dropdown_collection: software
         
   - title: "Blog Posts"
     url: /year-archive/
