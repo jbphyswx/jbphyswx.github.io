@@ -269,7 +269,7 @@ defaults:
       path: ""
       type: resources
     values:
-      layout: single
+      layout: resource
       author_profile: true
       share: false
   # _talks

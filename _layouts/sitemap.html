@@ -1,0 +1,147 @@
+---
+layout: archive
+---
+
+{% include base_path %}
+
+<div class="sitemap">
+  <p class="archive__intro">
+    Browse all sections of the site. An
+    <a href="{{ '/sitemap.xml' | relative_url }}">XML sitemap</a>
+    is also available for search engines.
+  </p>
+
+  <section class="sitemap__section">
+    <h2 class="sitemap__heading">Main</h2>
+    <ul class="sitemap__list">
+      <li class="sitemap__tile"><a href="{{ '/' | relative_url }}">Home</a></li>
+      <li class="sitemap__tile"><a href="{{ '/research/' | relative_url }}">Research</a></li>
+      <li class="sitemap__tile"><a href="{{ '/software/' | relative_url }}">Software</a></li>
+      <li class="sitemap__tile"><a href="{{ '/resources/' | relative_url }}">Resources</a></li>
+      <li class="sitemap__tile"><a href="{{ '/year-archive/' | relative_url }}">Blog</a></li>
+    </ul>
+  </section>
+
+  <section class="sitemap__section">
+    <h2 class="sitemap__heading">Academic</h2>
+    <ul class="sitemap__list">
+      <li class="sitemap__tile"><a href="{{ '/cv/' | relative_url }}">CV</a></li>
+      <li class="sitemap__tile"><a href="{{ '/publications/' | relative_url }}">Publications</a></li>
+      <li class="sitemap__tile"><a href="{{ '/talks/' | relative_url }}">Talks</a></li>
+      <li class="sitemap__tile"><a href="{{ '/teaching/' | relative_url }}">Teaching</a></li>
+    </ul>
+  </section>
+
+  {% assign topics_sorted = site.research_topics | sort: 'title' %}
+  {% if topics_sorted.size > 0 %}
+    <section class="sitemap__section">
+      <h2 class="sitemap__heading">Research topics</h2>
+      <ul class="sitemap__list">
+        {% for item in topics_sorted %}
+          <li class="sitemap__tile"><a href="{{ base_path }}{{ item.url }}">{{ item.title }}</a></li>
+        {% endfor %}
+      </ul>
+    </section>
+  {% endif %}
+
+  {% assign projects_sorted = site.research_projects | sort: 'title' %}
+  {% if projects_sorted.size > 0 %}
+    <section class="sitemap__section">
+      <h2 class="sitemap__heading">Research projects</h2>
+      <ul class="sitemap__list">
+        {% for item in projects_sorted %}
+          <li class="sitemap__tile"><a href="{{ base_path }}{{ item.url }}">{{ item.title }}</a></li>
+        {% endfor %}
+      </ul>
+    </section>
+  {% endif %}
+
+  {% assign software_sorted = site.software | sort: 'title' %}
+  {% if software_sorted.size > 0 %}
+    <section class="sitemap__section">
+      <h2 class="sitemap__heading">Software</h2>
+      <ul class="sitemap__list">
+        {% for item in software_sorted %}
+          <li class="sitemap__tile"><a href="{{ base_path }}{{ item.url }}">{{ item.title }}</a></li>
+        {% endfor %}
+      </ul>
+    </section>
+  {% endif %}
+
+  {% assign resource_cats_sorted = site.resource_categories | sort: 'title' %}
+  {% if resource_cats_sorted.size > 0 %}
+    <section class="sitemap__section">
+      <h2 class="sitemap__heading">Resource categories</h2>
+      <ul class="sitemap__list">
+        {% for item in resource_cats_sorted %}
+          <li class="sitemap__tile"><a href="{{ base_path }}{{ item.url }}">{{ item.title }}</a></li>
+        {% endfor %}
+      </ul>
+    </section>
+  {% endif %}
+
+  {% assign resources_sorted = site.resources | sort: 'title' %}
+  {% if resources_sorted.size > 0 %}
+    <section class="sitemap__section">
+      <h2 class="sitemap__heading">Resources</h2>
+      <ul class="sitemap__list">
+        {% for item in resources_sorted %}
+          <li class="sitemap__tile"><a href="{{ base_path }}{{ item.url }}">{{ item.title }}</a></li>
+        {% endfor %}
+      </ul>
+    </section>
+  {% endif %}
+
+  {% assign publications_sorted = site.publications | sort: 'date' | reverse %}
+  {% if publications_sorted.size > 0 %}
+    <section class="sitemap__section">
+      <h2 class="sitemap__heading">Publications</h2>
+      <ul class="sitemap__list">
+        {% for item in publications_sorted %}
+          <li class="sitemap__tile"><a href="{{ base_path }}{{ item.url }}">{{ item.title }}</a></li>
+        {% endfor %}
+      </ul>
+    </section>
+  {% endif %}
+
+  {% assign talks_sorted = site.talks | sort: 'date' | reverse %}
+  {% if talks_sorted.size > 0 %}
+    <section class="sitemap__section">
+      <h2 class="sitemap__heading">Talks</h2>
+      <ul class="sitemap__list">
+        {% for item in talks_sorted %}
+          <li class="sitemap__tile"><a href="{{ base_path }}{{ item.url }}">{{ item.title }}</a></li>
+        {% endfor %}
+      </ul>
+    </section>
+  {% endif %}
+
+  {% assign teaching_sorted = site.teaching | sort: 'date' | reverse %}
+  {% if teaching_sorted.size > 0 %}
+    <section class="sitemap__section">
+      <h2 class="sitemap__heading">Teaching</h2>
+      <ul class="sitemap__list">
+        {% for item in teaching_sorted %}
+          <li class="sitemap__tile"><a href="{{ base_path }}{{ item.url }}">{{ item.title }}</a></li>
+        {% endfor %}
+      </ul>
+    </section>
+  {% endif %}
+
+  {% assign posts_sorted = site.posts | sort: 'date' | reverse %}
+  {% if posts_sorted.size > 0 %}
+    <section class="sitemap__section">
+      <h2 class="sitemap__heading">Blog posts</h2>
+      <ul class="sitemap__list sitemap__list--dated">
+        {% for item in posts_sorted %}
+          <li class="sitemap__tile sitemap__tile--dated">
+            <a href="{{ base_path }}{{ item.url }}">
+              <span class="sitemap__date">{{ item.date | date: '%b %-d, %Y' }}</span>
+              <span class="sitemap__label">{{ item.title }}</span>
+            </a>
+          </li>
+        {% endfor %}
+      </ul>
+    </section>
+  {% endif %}
+</div>

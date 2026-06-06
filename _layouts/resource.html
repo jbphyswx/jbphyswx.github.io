@@ -1,0 +1,72 @@
+---
+layout: default
+---
+
+{% include base_path %}
+
+{% if page.logo %}
+  {% assign logo_src = page.logo | relative_url %}
+{% elsif page.link %}
+  {% assign logo_domain = page.link | remove: 'https://' | remove: 'http://' | split: '/' | first %}
+  {% assign logo_src = 'https://www.google.com/s2/favicons?domain=' | append: logo_domain | append: '&sz=128' %}
+{% endif %}
+
+{% assign category_page = site.resource_categories | where: "category", page.category | first %}
+
+<div id="main" role="main">
+  {% include sidebar.html %}
+
+  <article class="page resource-page">
+    {% if category_page %}
+      <p class="resource-page__back">
+        <a href="{{ base_path }}{{ category_page.url }}">← {{ category_page.title }}</a>
+      </p>
+    {% endif %}
+
+    <div class="resource-page__card">
+      {% if logo_src %}
+        <div class="resource-page__logo-wrap">
+          <img
+            class="resource-page__logo{% if page.logo_wide %} resource-page__logo--wide{% endif %}"
+            src="{{ logo_src }}"
+            alt=""
+            width="96"
+            height="96"
+            loading="lazy"
+            decoding="async">
+        </div>
+      {% endif %}
+
+      <div class="resource-page__body">
+        <h1 class="resource-page__title">{{ page.title | markdownify | remove: '<p>' | remove: '</p>' }}</h1>
+
+        {% if page.tagline %}
+          <p class="resource-page__tagline">{{ page.tagline }}</p>
+        {% endif %}
+
+        {% if page.excerpt %}
+          <div class="resource-page__excerpt">{{ page.excerpt | markdownify }}</div>
+        {% endif %}
+
+        {% if content != '' %}
+          <div class="resource-page__content">{{ content }}</div>
+        {% endif %}
+
+        {% if page.link %}
+          <div class="resource-page__actions">
+            <a
+              class="resource-page__cta"
+              href="{{ page.link }}"
+              target="_blank"
+              rel="noopener noreferrer">
+              Visit site
+              <span class="resource-page__cta-arrow" aria-hidden="true">↗</span>
+            </a>
+          </div>
+        {% endif %}
+      </div>
+    </div>
+
+    {% include resource_pagination.html %}
+  </article>
+</div>

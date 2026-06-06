@@ -71,7 +71,7 @@ layout: default
 
       {% if page.share %}{% include social-share.html %}{% endif %}
 
-      {% unless page.collection == 'software' or page.collection == 'posts' %}
+      {% unless page.collection == 'software' or page.collection == 'posts' or page.collection == 'resources' %}
         {% include post_pagination.html %}
       {% endunless %}
     </div>

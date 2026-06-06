@@ -587,6 +587,134 @@ a:active {
   transform: translateY(0);
 }
 
+/* Resource detail page */
+.resource-page {
+  margin-top: 0;
+}
+
+.resource-page__back {
+  margin: 0 0 1rem;
+  font-size: 0.88rem;
+}
+
+.resource-page__back a {
+  text-decoration: none;
+  opacity: 0.8;
+}
+
+.resource-page__back a:hover {
+  opacity: 1;
+}
+
+.resource-page__card {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 1.35rem;
+  align-items: start;
+  padding: 1.35rem 1.45rem;
+  border-radius: 0.75rem;
+  background: rgba(128, 128, 128, 0.05);
+}
+
+.resource-page__logo-wrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 6.5rem;
+}
+
+.resource-page__logo {
+  width: auto;
+  max-width: 5rem;
+  height: 5rem;
+  object-fit: contain;
+  border-radius: 0.4rem;
+}
+
+.resource-page__logo--wide {
+  max-width: 9rem;
+  height: 5.5rem;
+}
+
+.resource-page__title {
+  margin: 0 0 0.35rem;
+  font-size: 1.65rem;
+  line-height: 1.25;
+}
+
+.resource-page__tagline {
+  margin: 0 0 0.75rem;
+  font-size: 1rem;
+  line-height: 1.4;
+  opacity: 0.78;
+}
+
+.resource-page__excerpt {
+  margin: 0 0 1rem;
+  font-size: 0.95rem;
+  line-height: 1.55;
+  opacity: 0.9;
+}
+
+.resource-page__excerpt p {
+  margin: 0;
+}
+
+.resource-page__content {
+  margin: 0 0 1rem;
+  font-size: 0.95rem;
+  line-height: 1.55;
+}
+
+.resource-page__actions {
+  margin-top: 0.25rem;
+}
+
+.resource-page__cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.55rem 1rem;
+  border-radius: 0.45rem;
+  background: rgba(47, 175, 163, 0.18);
+  color: inherit;
+  font-size: 0.92rem;
+  font-weight: 600;
+  text-decoration: none;
+  border-bottom: none;
+  box-shadow: none;
+  transition:
+    background 0.2s ease,
+    transform 0.2s ease;
+}
+
+.resource-page__cta:hover,
+.resource-page__cta:focus {
+  text-decoration: none;
+  border-bottom: none;
+  box-shadow: none;
+  background: rgba(47, 175, 163, 0.28);
+  transform: translateY(-1px);
+}
+
+.resource-page__cta-arrow {
+  font-size: 0.9em;
+  opacity: 0.85;
+}
+
+@media (max-width: 47.9375em) {
+  .resource-page__card {
+    grid-template-columns: 1fr;
+    justify-items: center;
+    text-align: center;
+  }
+
+  .resource-page__actions {
+    display: flex;
+    justify-content: center;
+  }
+}
+
 /* Software detail: compact prev/next */
 .software-nav {
   display: flex;
