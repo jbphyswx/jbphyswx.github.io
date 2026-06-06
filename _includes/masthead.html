@@ -40,8 +40,32 @@
         </a>
         <ul class="visible-links">
           {%- for link in site.data.navigation.main -%}
-            <li class="masthead__menu-item">
+            {%- assign has_dropdown = false -%}
+            {%- if link.dropdown_collection == 'software' and site.software.size > 0 -%}
+              {%- assign has_dropdown = true -%}
+              {%- assign dropdown_items = site.software | sort: 'title' -%}
+            {%- elsif link.children -%}
+              {%- assign has_dropdown = true -%}
+              {%- assign dropdown_items = link.children -%}
+            {%- endif -%}
+            <li class="masthead__menu-item{% if has_dropdown %} masthead__menu-item--dropdown{% endif %}">
               <a href="{{ link.url | relative_url }}"{% if link.description %} title="{{ link.description }}"{% endif %}>{{ link.title }}</a>
+              {%- if has_dropdown -%}
+                <ul class="nav-dropdown">
+                  <li class="nav-dropdown__all">
+                    <a href="{{ link.url | relative_url }}">All {{ link.title | downcase }}</a>
+                  </li>
+                  {%- for item in dropdown_items -%}
+                    <li>
+                      {%- if link.dropdown_collection == 'software' -%}
+                        <a href="{{ item.repo | default: item.url | relative_url }}"{% if item.repo %} target="_blank" rel="noopener noreferrer"{% endif %}>{{ item.title }}</a>
+                      {%- else -%}
+                        <a href="{{ item.url | relative_url }}">{{ item.title }}</a>
+                      {%- endif -%}
+                    </li>
+                  {%- endfor -%}
+                </ul>
+              {%- endif -%}
             </li>
           {%- endfor -%}
         </ul>
