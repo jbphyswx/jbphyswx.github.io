@@ -43,7 +43,13 @@
         <ul class="visible-links">
           {%- for link in site.data.navigation.main -%}
             {%- assign has_dropdown = false -%}
-            {%- if link.dropdown_collection -%}
+            {%- if link.research_menu -%}
+              {%- assign research_topics_menu = site.research_topics | sort: 'title' -%}
+              {%- assign research_projects_menu = site.research_projects | sort: 'title' -%}
+              {%- if research_topics_menu.size > 0 or research_projects_menu.size > 0 -%}
+                {%- assign has_dropdown = true -%}
+              {%- endif -%}
+            {%- elsif link.dropdown_collection -%}
               {%- assign dropdown_items = site[link.dropdown_collection] | sort: 'title' -%}
               {%- if dropdown_items.size > 0 -%}
                 {%- assign has_dropdown = true -%}
@@ -55,6 +61,8 @@
             {%- assign nav_active = false -%}
             {%- if page.url == link.url -%}
               {%- assign nav_active = true -%}
+            {%- elsif link.research_menu and page.url contains '/research/' -%}
+              {%- assign nav_active = true -%}
             {%- elsif link.dropdown_collection and page.collection == link.dropdown_collection -%}
               {%- assign nav_active = true -%}
             {%- elsif link.url == '/resources/' and page.collection == 'resources' -%}
@@ -64,32 +72,58 @@
             {%- elsif link.url != '/' and page.url contains link.url -%}
               {%- assign nav_active = true -%}
             {%- endif -%}
-            <li class="masthead__menu-item{% if has_dropdown %} masthead__menu-item--dropdown{% endif %}{% if nav_active %} masthead__menu-item--active{% endif %}">
+            <li class="masthead__menu-item{% if has_dropdown %} masthead__menu-item--dropdown{% if link.research_menu %} masthead__menu-item--research{% endif %}{% endif %}{% if nav_active %} masthead__menu-item--active{% endif %}">
               <a href="{{ link.url | relative_url }}"{% if link.description %} title="{{ link.description }}"{% endif %}{% if page.url == link.url %} aria-current="page"{% endif %}>{{ link.title }}</a>
               {%- if has_dropdown -%}
-                <ul class="nav-dropdown">
-                  <li class="nav-dropdown__all">
-                    <a href="{{ link.url | relative_url }}">All {{ link.title | downcase }}</a>
-                  </li>
-                  {%- for item in dropdown_items -%}
-                    <li{% if page.url == item.url %} class="nav-dropdown__item--active"{% endif %}>
-                      <a href="{{ item.url | relative_url }}"{% if page.url == item.url %} aria-current="page"{% endif %}>{{ item.title }}</a>
+                {%- if link.research_menu -%}
+                  <ul class="nav-dropdown nav-dropdown--research">
+                    <li class="nav-dropdown__all">
+                      <a href="{{ link.url | relative_url }}">All research</a>
                     </li>
-                  {%- endfor -%}
-                </ul>
+                    {%- for topic in research_topics_menu -%}
+                      <li class="nav-dropdown__item--nested{% if page.url == topic.url %} nav-dropdown__item--active{% endif %}">
+                        <a href="{{ topic.url | relative_url }}"{% if page.url == topic.url %} aria-current="page"{% endif %}>{{ topic.title }}</a>
+                        <ul class="nav-dropdown__submenu">
+                          {%- for project in research_projects_menu -%}
+                            {%- if project.topics contains topic.topic_key -%}
+                              <li{% if page.url == project.url %} class="nav-dropdown__item--active"{% endif %}>
+                                <a href="{{ project.url | relative_url }}"{% if page.url == project.url %} aria-current="page"{% endif %}>{{ project.title }}</a>
+                              </li>
+                            {%- endif -%}
+                          {%- endfor -%}
+                        </ul>
+                      </li>
+                    {%- endfor -%}
+                    {% comment %}
+                      TODO: Drop the flat project list below once project count grows;
+                      nested topic flyouts above should remain the primary navigation path.
+                    {% endcomment %}
+                    <li class="nav-dropdown__divider" role="separator" aria-hidden="true"></li>
+                    {%- for project in research_projects_menu -%}
+                      <li class="nav-dropdown__project{% if page.url == project.url %} nav-dropdown__item--active{% endif %}">
+                        <a href="{{ project.url | relative_url }}"{% if page.url == project.url %} aria-current="page"{% endif %}>{{ project.title }}</a>
+                      </li>
+                    {%- endfor -%}
+                  </ul>
+                {%- else -%}
+                  <ul class="nav-dropdown">
+                    <li class="nav-dropdown__all">
+                      <a href="{{ link.url | relative_url }}">All {{ link.title | downcase }}</a>
+                    </li>
+                    {%- for item in dropdown_items -%}
+                      <li{% if page.url == item.url %} class="nav-dropdown__item--active"{% endif %}>
+                        <a href="{{ item.url | relative_url }}"{% if page.url == item.url %} aria-current="page"{% endif %}>{{ item.title }}</a>
+                      </li>
+                    {%- endfor -%}
+                  </ul>
+                {%- endif -%}
               {%- endif -%}
             </li>
           {%- endfor -%}
         </ul>
         <div class="greedy-nav__actions">
-          {% if site.minimal_mistakes_skin2 %}
-            <i class="fas fa-fw fa-adjust" aria-hidden="true" onclick="node1=document.getElementById('theme_source');node2=document.getElementById('theme_source_2');if(node1.getAttribute('rel')=='stylesheet'){node1.setAttribute('rel', 'stylesheet alternate'); node2.setAttribute('rel', 'stylesheet');sessionStorage.setItem('theme', 'dark');}else{node2.setAttribute('rel', 'stylesheet alternate'); node1.setAttribute('rel', 'stylesheet');sessionStorage.setItem('theme', 'light');} return false;"></i>
-          {% endif %}
           {% if site.search == true %}
-          <button class="search__toggle" type="button">
-            <span class="visually-hidden">{{ site.data.ui-text[site.locale].search_label | default: "Toggle search" }}</span>
-            <i class="fas fa-search"></i>
-          </button>
+            {% include masthead-search.html %}
           {% endif %}
           <button class="greedy-nav__toggle hidden" type="button">
             <span class="visually-hidden">{{ site.data.ui-text[site.locale].menu_label | default: "Toggle menu" }}</span>

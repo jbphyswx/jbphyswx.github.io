@@ -1,5 +1,9 @@
 # Header navigation
 main:
+  - title: "Research"
+    url: /research/
+    research_menu: true
+
   - title: "Software"
     url: /software/
     dropdown_collection: software
@@ -8,11 +12,8 @@ main:
     url: /resources/
     dropdown_collection: resource_categories
 
-  - title: "Blog Posts"
+  - title: "Blog"
     url: /year-archive/
-
-  - title: "Guide"
-    url: /markdown/
 
 # Sidebar navigation
 sidebar:

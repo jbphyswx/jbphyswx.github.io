@@ -1,0 +1,11 @@
+<div class="masthead-search">
+  <label class="visually-hidden" for="search">{{ site.data.ui-text[site.locale].search_label | default: "Search" }}</label>
+  <input
+    type="search"
+    id="search"
+    class="masthead-search__input"
+    placeholder="{{ site.data.ui-text[site.locale].search_label_text | default: 'Search…' }}"
+    autocomplete="off"
+    spellcheck="false" />
+  <div id="results" class="masthead-search__results results"></div>
+</div>
