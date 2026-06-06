@@ -5,6 +5,7 @@
   {% if page.author_profile or layout.author_profile %}
     {% include author-profile.html %}
     {% if site.data.navigation.sidebar %}{% include sidebar-nav.html %}{% endif %}
+    {% if site.minimal_mistakes_skin2 %}{% include sidebar-theme-toggle.html %}{% endif %}
   {% endif %}
   {% if page.sidebar %}
     {% for s in page.sidebar %}

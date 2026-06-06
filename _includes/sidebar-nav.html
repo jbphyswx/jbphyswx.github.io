@@ -1,6 +1,7 @@
 {% include base_path %}
 
 <nav class="sidebar-nav" aria-label="Site sections">
+  {% include sidebar-divider.html %}
   <ul class="sidebar-nav__list">
     {%- for link in site.data.navigation.sidebar -%}
       {%- assign nav_active = false -%}
