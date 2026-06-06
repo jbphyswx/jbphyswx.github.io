@@ -1,48 +1,77 @@
-A Github Pages template for academic websites. This was forked (then detached) by [Stuart Geiger](https://github.com/staeiou) from the [Minimal Mistakes Jekyll Theme](https://mmistakes.github.io/minimal-mistakes/), which is © 2016 Michael Rose and released under the MIT License. See LICENSE.md.
+# Jordan Benjamin — Personal Site
 
-I think I've got things running smoothly and fixed some major bugs, but feel free to file issues or make pull requests if you want to improve the generic template / theme.
+Academic personal site built with [Jekyll 4](https://jekyllrb.com/) and the [Minimal Mistakes](https://mmistakes.github.io/minimal-mistakes/) remote theme. Originally forked from [AcademicPages](https://github.com/academicpages/academicpages.github.io).
 
-# Setup
+## Local development
 
-## Getting Started
+**Requirements:** Ruby 3.1+ (latest Ruby works fine) and Bundler.
 
-This is a Jekyll site hosted on GitHub Pages using the [Minimal Mistakes](https://mmistakes.github.io/minimal-mistakes/) remote theme.
+```bash
+# macOS: install Ruby if needed
+brew install ruby
+# then ensure Homebrew Ruby is on your PATH (brew prints instructions after install)
 
-### Configuration
+bundle install
+bin/serve
+```
 
-1. Edit `_config.yml` to set your site title, author name, and other metadata
-2. Update social links in the `author` section (email, twitter, github, etc.)
-3. Add your content:
-   - Blog posts in `_posts/`
-   - Publication info in `_publications/`
-   - Teaching materials in `_teaching/`
-   - Talks in `_talks/`
-   - Portfolio items in `_portfolio/`
+Open [http://127.0.0.1:4000](http://127.0.0.1:4000). The server rebuilds automatically on file changes.
 
-## To run locally (not on GitHub Pages, to serve on your own computer)
+`bin/serve` loads `_config_dev.yml` so internal links stay on localhost (production `url` in `_config.yml` is unchanged for deploy).
 
-1. Clone the repository: `git clone https://github.com/jbphyswx/jbphyswx.github.io.git`
-1. Install Ruby 3.1.4 (or check `.ruby-version` for current version)
-1. Run `bundle install` to install dependencies
-1. Run `bundle exec jekyll serve --livereload` to start the dev server at `localhost:4000`
-   - The site will automatically rebuild and refresh on changes
-   - Press `Ctrl+C` to stop the server
+**Local preview workflow:** save a file → wait for `...done in X seconds` → refresh the browser (Cmd+Shift+R). Do not refresh while a rebuild is running. If the site looks broken (missing CSS/photo), run `bin/build` then restart `bin/serve`. Restart `bin/serve` after any `_config.yml` change.
 
-## Tech Stack
+Other useful commands:
 
-- **Jekyll 4.4.1** - Static site generator
-- **Minimal Mistakes** - Remote theme (no local theme assets needed)
-- **GitHub Pages** - Automatic deployment on push
-- **Ruby 3.1.4** - Via rbenv for reproducible environments
-- **Sass** - CSS preprocessing (pure-Ruby for broad OS compatibility)
+```bash
+bundle exec jekyll build          # one-off build → _site/
+bundle exec jekyll serve --livereload --drafts  # include draft posts
+```
 
+## Editing content
 
-## Related Projects
+| What | Where |
+|------|-------|
+| Home page | `_pages/about.md` |
+| Site settings, author info, nav | `_config.yml`, `_data/navigation.yml` |
+| Blog posts | `_posts/` |
+| Publications | `_publications/` |
+| Talks | `_talks/` |
+| Teaching | `_teaching/` |
+| Software | `_software/` |
+| CV | `_pages/cv.md` |
 
-- [Minimal Mistakes Theme](https://mmistakes.github.io/minimal-mistakes/) - Actively maintained Jekyll theme
-- [AcademicPages](https://github.com/academicpages/academicpages.github.io) - Original template this was forked from
-- [al-folio](https://github.com/alshedivat/al-folio) - Alternative academic portfolio template
+Restart the dev server after changing `_config.yml`.
+
+## Deployment
+
+The site is built and deployed via GitHub Actions (`.github/workflows/deploy.yml`), not GitHub's legacy Jekyll builder. This allows Jekyll 4 and the remote theme.
+
+To publish:
+
+1. Push to `main`
+2. In the repo on GitHub: **Settings → Pages → Build and deployment → Source: GitHub Actions**
+3. The deploy workflow runs automatically on each push to `main`
+
+The repo can stay private if you have GitHub Pro (or equivalent) with Pages enabled.
+
+## Tech stack
+
+- Jekyll 4.4 + Minimal Mistakes (remote theme)
+- GitHub Actions for build and deploy
+- Sass via `jekyll-sass-converter` + `sassc`
+
+## Related projects
+
+Notes on other academic site templates and tools worth comparing:
+
+- [Minimal Mistakes Theme](https://mmistakes.github.io/minimal-mistakes/) — Actively maintained Jekyll theme
+- [AcademicPages](https://github.com/academicpages/academicpages.github.io) — Original template this was forked from
+- [al-folio](https://github.com/alshedivat/al-folio) — Alternative academic portfolio template
 - [astro](https://github.com/withastro/astro)
 - [Hugo, HugoBlox](https://github.com/HugoBlox/hugo-theme-academic-cv), https://github.com/HugoBlox/kit
 - https://github.com/sbryngelson/academic-website-template [and https://ethan-pickering.github.io/aboutwebsite.html]
 
+---
+
+A Github Pages template for academic websites. This was forked (then detached) by [Stuart Geiger](https://github.com/staeiou) from the [Minimal Mistakes Jekyll Theme](https://mmistakes.github.io/minimal-mistakes/), which is © 2016 Michael Rose and released under the MIT License. See LICENSE.md.
