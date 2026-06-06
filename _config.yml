@@ -17,8 +17,11 @@ repository               : "jbphyswx/jbphyswx.github.io"
 masthead_title           : "Home" # overrides the website title displayed in the masthead, use " " for no title
 teaser                   :  # filename of teaser fallback teaser image placed in /images/, .e.g. "500x300.png"
 breadcrumbs              : false # true, false (default)
+search                   : true
+lunr:
+  search_within_pages    : true
 words_per_minute         : 160
-future                   : true
+future                   : false
 read_more                : "disabled" # if enabled, adds "Read more" links to excerpts
 talkmap_link             : false #change to true to add link to talkmap on talks page
 comments:
@@ -110,7 +113,7 @@ author:
   stackoverflow    : # http://stackoverflow.com/users/123456/username
   steam            :
   tumblr           :
-  twitter          : "jbstormz"
+  twitter          :
   vine             :
   weibo            :
   xing             :
@@ -194,7 +197,13 @@ collections:
   talks:
     output: true
     permalink: /:collection/:path/
-    
+  research_topics:
+    output: true
+    permalink: /research/topics/:path/
+  research_projects:
+    output: true
+    permalink: /research/projects/:path/
+
 # Remote theme - using Minimal Mistakes with a local remote
 remote_theme: mmistakes/minimal-mistakes@4.24.0
 minimal_mistakes_skin: "default"  # light theme (main.css)
@@ -270,6 +279,22 @@ defaults:
       layout: talk
       author_profile: true
       share: true
+  # _research_topics
+  - scope:
+      path: ""
+      type: research_topics
+    values:
+      layout: research-topic
+      author_profile: true
+      share: false
+  # _research_projects
+  - scope:
+      path: ""
+      type: research_projects
+    values:
+      layout: research-project
+      author_profile: true
+      share: false
 
 # Sass/SCSS
 sass:
