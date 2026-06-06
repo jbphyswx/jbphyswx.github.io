@@ -1001,7 +1001,14 @@ a:active {
   opacity: 1;
 }
 
-/* Research topic tiles */
+/* Research topic tiles — full-width stack on index */
+.research-topic-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.25rem;
+  margin-top: 1.5rem;
+}
+
 .research-topic-tile {
   --topic-color: #4a7c9b;
   border: none;
