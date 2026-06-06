@@ -1,0 +1,50 @@
+{% include base_path %}
+
+{% if post.id %}
+  {% assign title = post.title | markdownify | remove: "<p>" | remove: "</p>" %}
+{% else %}
+  {% assign title = post.title %}
+{% endif %}
+
+<div class="software-tile">
+  <article class="software-tile__inner" itemscope itemtype="http://schema.org/CreativeWork">
+    <h2 class="software-tile__title" itemprop="headline">
+      {% if post.link %}
+        <a href="{{ post.link }}" target="_blank" rel="noopener noreferrer">{{ title }}</a>
+      {% else %}
+        <a href="{{ base_path }}{{ post.url }}" rel="permalink">{{ title }}</a>
+      {% endif %}
+    </h2>
+
+    {% if post.collection == 'publications' and post.venue %}
+      <p class="software-tile__meta">
+        <em>{{ post.venue }}</em>{% if post.date %}, {{ post.date | date: '%Y' }}{% endif %}
+      </p>
+    {% elsif post.collection == 'talks' %}
+      <p class="software-tile__meta">
+        {% if post.type %}{{ post.type }}{% endif %}
+        {% if post.venue %} at <em>{{ post.venue }}</em>{% endif %}
+        {% if post.location %}, {{ post.location }}{% endif %}
+        {% if post.date %} · {{ post.date | date: '%b %Y' }}{% endif %}
+      </p>
+    {% elsif post.collection == 'teaching' %}
+      <p class="software-tile__meta">
+        {% if post.type %}{{ post.type }}{% endif %}
+        {% if post.venue %} — {{ post.venue }}{% endif %}
+        {% if post.date %} · {{ post.date | date: '%Y' }}{% endif %}
+      </p>
+    {% endif %}
+
+    {% if post.excerpt %}
+      <p class="software-tile__excerpt" itemprop="description">{{ post.excerpt | markdownify | remove: '<p>' | remove: '</p>' }}</p>
+    {% endif %}
+
+    {% if post.paperurl %}
+      <p class="software-tile__links">
+        <a href="{{ post.paperurl }}" class="software-tile__repo" target="_blank" rel="noopener noreferrer">
+          <i class="fas fa-file-pdf" aria-hidden="true"></i> PDF
+        </a>
+      </p>
+    {% endif %}
+  </article>
+</div>
