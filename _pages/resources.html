@@ -1,0 +1,15 @@
+---
+layout: archive
+title: "Resources"
+permalink: /resources/
+author_profile: true
+---
+
+{% include base_path %}
+
+<div class="software-grid">
+  {% assign categories = site.resource_categories | sort: "title" %}
+  {% for post in categories %}
+    {% include archive-single-resource-category.html %}
+  {% endfor %}
+</div>

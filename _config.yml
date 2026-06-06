@@ -185,6 +185,12 @@ collections:
   software:
     output: true
     permalink: /:collection/:path/
+  resource_categories:
+    output: true
+    permalink: /:collection/:path/
+  resources:
+    output: true
+    permalink: /:collection/:path/
   talks:
     output: true
     permalink: /:collection/:path/
@@ -236,6 +242,22 @@ defaults:
   - scope:
       path: ""
       type: software
+    values:
+      layout: single
+      author_profile: true
+      share: false
+  # _resource_categories
+  - scope:
+      path: ""
+      type: resource_categories
+    values:
+      layout: resource-category
+      author_profile: true
+      share: false
+  # _resources
+  - scope:
+      path: ""
+      type: resources
     values:
       layout: single
       author_profile: true

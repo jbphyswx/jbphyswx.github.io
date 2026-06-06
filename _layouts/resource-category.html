@@ -1,0 +1,14 @@
+---
+layout: archive
+---
+
+{% include base_path %}
+
+{% assign category_slug = page.category | default: page.slug %}
+{% assign category_resources = site.resources | where: "category", category_slug | sort: "title" %}
+
+<div class="resource-grid">
+  {% for post in category_resources %}
+    {% include archive-single-resource.html %}
+  {% endfor %}
+</div>
