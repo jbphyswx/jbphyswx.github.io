@@ -1,0 +1,39 @@
+{% include base_path %}
+
+{% assign posts_sorted = site.posts | sort: "date" %}
+{% assign prev_item = nil %}
+{% assign next_item = nil %}
+
+{% for item in posts_sorted %}
+  {% if item.url == page.url %}
+    {% assign idx = forloop.index0 %}
+    {% assign prev_index = idx | minus: 1 %}
+    {% assign next_index = idx | plus: 1 %}
+    {% if prev_index >= 0 %}
+      {% assign prev_item = posts_sorted[prev_index] %}
+    {% endif %}
+    {% if next_index < posts_sorted.size %}
+      {% assign next_item = posts_sorted[next_index] %}
+    {% endif %}
+    {% break %}
+  {% endif %}
+{% endfor %}
+
+{% if prev_item or next_item %}
+  <nav class="software-nav" aria-label="Blog post navigation">
+    <div class="software-nav__prev">
+      {% if prev_item %}
+        <a href="{{ base_path }}{{ prev_item.url }}" rel="prev">
+          <span class="software-nav__arrow" aria-hidden="true">←</span> {{ prev_item.title }}
+        </a>
+      {% endif %}
+    </div>
+    <div class="software-nav__next">
+      {% if next_item %}
+        <a href="{{ base_path }}{{ next_item.url }}" rel="next">
+          {{ next_item.title }} <span class="software-nav__arrow" aria-hidden="true">→</span>
+        </a>
+      {% endif %}
+    </div>
+  </nav>
+{% endif %}

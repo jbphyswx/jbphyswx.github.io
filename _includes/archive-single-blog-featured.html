@@ -1,0 +1,49 @@
+{% include base_path %}
+
+{% assign post = include.post %}
+
+{% if post.id %}
+  {% assign title = post.title | markdownify | remove: "<p>" | remove: "</p>" %}
+{% else %}
+  {% assign title = post.title %}
+{% endif %}
+
+{% if post.header.teaser %}
+  {% if post.header.teaser contains "://" %}
+    {% assign teaser_src = post.header.teaser %}
+  {% else %}
+    {% assign teaser_src = post.header.teaser | prepend: "/images/" | prepend: base_path %}
+  {% endif %}
+{% endif %}
+
+<article class="blog-featured{% unless teaser_src %} blog-featured--no-figure{% endunless %}" itemscope itemtype="http://schema.org/BlogPosting">
+  {% if teaser_src %}
+    <a class="blog-featured__figure" href="{{ base_path }}{{ post.url }}">
+      <img src="{{ teaser_src }}" alt="" loading="lazy" decoding="async">
+    </a>
+  {% endif %}
+
+  <div class="blog-featured__body">
+    <time class="blog-featured__date" datetime="{{ post.date | date_to_xmlschema }}">
+      {{ post.date | date: "%B %-d, %Y" }}
+    </time>
+
+    <h2 class="blog-featured__title" itemprop="headline">
+      <a href="{{ base_path }}{{ post.url }}" rel="permalink">{{ title }}</a>
+    </h2>
+
+    {% if post.content %}
+      <div class="blog-featured__preview" itemprop="description">
+        {{ post.content | markdownify }}
+      </div>
+    {% elsif post.excerpt %}
+      <div class="blog-featured__preview" itemprop="description">
+        {{ post.excerpt | markdownify }}
+      </div>
+    {% endif %}
+
+    <p class="blog-featured__more">
+      <a href="{{ base_path }}{{ post.url }}">Continue reading</a>
+    </p>
+  </div>
+</article>

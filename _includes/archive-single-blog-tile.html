@@ -1,0 +1,23 @@
+{% include base_path %}
+
+{% assign post = include.post %}
+
+{% if post.id %}
+  {% assign title = post.title | markdownify | remove: "<p>" | remove: "</p>" %}
+{% else %}
+  {% assign title = post.title %}
+{% endif %}
+
+<article class="blog-tile" itemscope itemtype="http://schema.org/BlogPosting">
+  <time class="blog-tile__date" datetime="{{ post.date | date_to_xmlschema }}">
+    {{ post.date | date: "%b %-d, %Y" }}
+  </time>
+
+  <h2 class="blog-tile__title" itemprop="headline">
+    <a href="{{ base_path }}{{ post.url }}" rel="permalink">{{ title }}</a>
+  </h2>
+
+  {% if post.excerpt %}
+    <p class="blog-tile__excerpt" itemprop="description">{{ post.excerpt | markdownify | strip_html | truncate: 120 }}</p>
+  {% endif %}
+</article>
