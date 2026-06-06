@@ -51,6 +51,7 @@ staticman:
       options:
         format           : "iso8601" # "iso8601" (default), "timestamp-seconds", "timestamp-milliseconds"
 atom_feed:
+  hide                   : true
   path                   : # blank (default) uses feed.xml
 
 # SEO Related
@@ -61,7 +62,7 @@ yandex_site_verification :
 
 # Social Sharing
 twitter:
-  username: "jbstormz"
+  username:
 facebook:
   username               :
   app_id                 :
