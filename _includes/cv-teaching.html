@@ -1,0 +1,17 @@
+{% include base_path %}
+
+<ul class="cv-list">
+  {% assign teaching_sorted = site.teaching | sort: 'date' | reverse %}
+  {% for post in teaching_sorted %}
+    <li class="cv-list__item">
+      <a href="{{ base_path }}{{ post.url }}">{{ post.title }}</a>
+      {% if post.venue or post.date %}
+        <span class="cv-list__meta">
+          {% if post.type %}{{ post.type }}{% endif %}
+          {% if post.venue %} — {{ post.venue }}{% endif %}
+          {% if post.date %} ({{ post.date | date: '%Y' }}){% endif %}
+        </span>
+      {% endif %}
+    </li>
+  {% endfor %}
+</ul>

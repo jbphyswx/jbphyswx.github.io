@@ -1,0 +1,15 @@
+{% include base_path %}
+
+<ul class="cv-list">
+  {% assign pubs = site.publications | sort: 'date' | reverse %}
+  {% for post in pubs %}
+    <li class="cv-list__item">
+      {% if post.citation %}
+        {{ post.citation | markdownify | remove: '<p>' | remove: '</p>' }}
+      {% else %}
+        <a href="{{ base_path }}{{ post.url }}">{{ post.title }}</a>
+        {% if post.venue %}<span class="cv-list__meta"> — <em>{{ post.venue }}</em>{% if post.date %}, {{ post.date | date: '%Y' }}{% endif %}</span>{% endif %}
+      {% endif %}
+    </li>
+  {% endfor %}
+</ul>

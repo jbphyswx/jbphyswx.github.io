@@ -1,0 +1,35 @@
+---
+layout: default
+---
+
+{% if page.header.overlay_color or page.header.overlay_image or page.header.image %}
+  {% include page__hero.html %}
+{% endif %}
+
+{% if page.url != "/" and site.breadcrumbs %}
+  {% unless paginator %}
+    {% include breadcrumbs.html %}
+  {% endunless %}
+{% endif %}
+
+<div id="main" role="main">
+  {% include sidebar.html %}
+
+  <div class="archive cv-page">
+    <header class="cv-header">
+      {% unless page.header.overlay_color or page.header.overlay_image %}
+        <h1 class="page__title cv-header__title">{{ page.title }}</h1>
+      {% endunless %}
+      {% if page.cv_pdf %}
+        <a href="{{ page.cv_pdf | relative_url }}" class="cv-download" download>
+          <i class="fas fa-file-pdf" aria-hidden="true"></i>
+          <span>Download PDF</span>
+        </a>
+      {% endif %}
+    </header>
+
+    <div class="cv">
+      {{ content }}
+    </div>
+  </div>
+</div>
