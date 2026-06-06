@@ -5,5 +5,5 @@ search: false
 
 @charset "utf-8";
 
-/* Remote theme styles are loaded via layout includes, no need to import */
-/* Add any custom overrides here */
+@import "minimal-mistakes/skins/{{ site.minimal_mistakes_skin | default: 'default' }}";
+@import "minimal-mistakes";
