@@ -1,0 +1,3 @@
+# Local-only overrides (used by bin/serve, not production deploy)
+# Empty url → relative links (/software/...) so localhost and 127.0.0.1 share sessionStorage
+url: ""

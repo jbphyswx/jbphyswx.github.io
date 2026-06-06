@@ -1,0 +1,13 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+cd "$(dirname "$0")/.."
+
+if [[ -x /usr/local/opt/ruby/bin/ruby ]]; then
+  export PATH="/usr/local/opt/ruby/bin:/usr/local/lib/ruby/gems/$(/usr/local/opt/ruby/bin/ruby -e 'print RUBY_VERSION[/^\d+\.\d+/]')/bin:$PATH"
+elif [[ -x /opt/homebrew/opt/ruby/bin/ruby ]]; then
+  export PATH="/opt/homebrew/opt/ruby/bin:/opt/homebrew/lib/ruby/gems/$(/opt/homebrew/opt/ruby/bin/ruby -e 'print RUBY_VERSION[/^\d+\.\d+/]')/bin:$PATH"
+fi
+
+bundle check >/dev/null 2>&1 || bundle install
+bundle exec jekyll build --config _config.yml,_config_dev.yml "$@"

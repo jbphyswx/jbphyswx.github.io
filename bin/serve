@@ -1,0 +1,28 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+cd "$(dirname "$0")/.."
+
+# Prefer Homebrew Ruby over macOS system Ruby when available
+if [[ -x /usr/local/opt/ruby/bin/ruby ]]; then
+  export PATH="/usr/local/opt/ruby/bin:/usr/local/lib/ruby/gems/$(/usr/local/opt/ruby/bin/ruby -e 'print RUBY_VERSION[/^\d+\.\d+/]')/bin:$PATH"
+elif [[ -x /opt/homebrew/opt/ruby/bin/ruby ]]; then
+  export PATH="/opt/homebrew/opt/ruby/bin:/opt/homebrew/lib/ruby/gems/$(/opt/homebrew/opt/ruby/bin/ruby -e 'print RUBY_VERSION[/^\d+\.\d+/]')/bin:$PATH"
+fi
+
+bundle check >/dev/null 2>&1 || bundle install
+
+echo "Starting Jekyll at http://127.0.0.1:4000"
+echo "  • Save a file → wait for '...done in X seconds' in this terminal"
+echo "  • Then refresh the browser yourself (Cmd+Shift+R)"
+echo "  • If the site looks broken: Ctrl+C, run bin/build, then bin/serve again"
+echo "  • Restart required after _config.yml changes"
+echo ""
+
+# No --livereload: auto-refresh often hits mid-rebuild → broken CSS/images
+# No --incremental: full rebuild (~4s) is more reliable than partial updates
+exec bundle exec jekyll serve \
+  --force_polling \
+  --host 127.0.0.1 \
+  --config _config.yml,_config_dev.yml \
+  "$@"
