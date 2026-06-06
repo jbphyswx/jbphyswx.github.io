@@ -1,0 +1,83 @@
+---
+layout: default
+---
+
+{% include base_path %}
+
+<div id="main" role="main">
+  {% include sidebar.html %}
+
+  <div class="archive home-page">
+    <section
+      class="home-about-tile"
+      style="--tile-color: {{ page.about_color | default: '#3DB8D4' }};"
+      aria-labelledby="home-about-heading">
+      <h2 id="home-about-heading" class="home-about-tile__heading">About</h2>
+
+      {% if page.about_blurb %}
+        <div class="home-about-tile__block home-about-tile__block--blurb">
+          {{ page.about_blurb | markdownify }}
+        </div>
+      {% endif %}
+
+      {% if page.interests %}
+        <div
+          class="home-about-tile__block home-about-tile__block--interests"
+          style="--interests-color: {{ page.interests_color | default: '#3D9A7A' }};">
+          <h3 class="home-about-tile__subheading">Interests</h3>
+          {% assign interests_half = page.interests.size | plus: 1 | divided_by: 2 %}
+          <div class="home-interests">
+            <ul class="home-interests__col">
+              {% for interest in page.interests limit: interests_half %}
+                <li>{{ interest }}</li>
+              {% endfor %}
+            </ul>
+            <div class="home-interests__divider" aria-hidden="true"></div>
+            <ul class="home-interests__col">
+              {% for interest in page.interests offset: interests_half %}
+                <li>{{ interest }}</li>
+              {% endfor %}
+            </ul>
+          </div>
+        </div>
+      {% endif %}
+
+      {% if page.working_on %}
+        <div class="home-about-tile__block home-about-tile__block--working">
+          <h3 class="home-about-tile__subheading">Lately</h3>
+          {{ page.working_on | markdownify }}
+        </div>
+      {% endif %}
+    </section>
+
+    {% assign updates = site.data.home_updates %}
+    {% if updates and updates.size > 0 %}
+      <section class="home-updates" aria-labelledby="home-updates-heading">
+        <h2 id="home-updates-heading" class="home-updates__heading">Recent updates</h2>
+
+        <div class="home-updates__list">
+          {% assign update_colors = "#C4785A,#4A7C9B,#2A9D8F,#8B6BB8,#5B8F72" | split: "," %}
+          {% for update in updates %}
+            {% assign color_index = forloop.index0 | modulo: update_colors.size %}
+            {% assign tile_color = update_colors[color_index] %}
+            <article
+              class="home-update-tile"
+              style="--tile-color: {{ tile_color }};">
+              {% if update.date %}
+                <time class="home-update-tile__date" datetime="{{ update.date }}">
+                  {{ update.date | date: "%b %-d, %Y" }}
+                </time>
+              {% endif %}
+              {% if update.title %}
+                <h3 class="home-update-tile__title">{{ update.title }}</h3>
+              {% endif %}
+              {% if update.text %}
+                <p class="home-update-tile__text">{{ update.text }}</p>
+              {% endif %}
+            </article>
+          {% endfor %}
+        </div>
+      </section>
+    {% endif %}
+  </div>
+</div>
