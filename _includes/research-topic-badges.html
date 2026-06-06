@@ -1,0 +1,26 @@
+{% include base_path %}
+
+{% assign badge_topics = include.topics %}
+{% if badge_topics == nil %}
+  {% assign badge_topics = page.topics %}
+{% endif %}
+
+{% if badge_topics and badge_topics.size > 0 %}
+  <div class="research-badges{% if include.detail %} research-badges--detail{% endif %}">
+    {% for slug in badge_topics %}
+      {% assign meta = site.data.research_topics[slug] %}
+      {% assign topic_doc = site.research_topics | where: "topic_key", slug | first %}
+      {% if meta %}
+        {% if include.link_to_topics and topic_doc %}
+          <a
+            class="research-badge"
+            href="{{ base_path }}{{ topic_doc.url }}"
+            style="--topic-color: {{ meta.color }};"
+            >{{ meta.title }}</a>
+        {% else %}
+          <span class="research-badge" style="--topic-color: {{ meta.color }};">{{ meta.title }}</span>
+        {% endif %}
+      {% endif %}
+    {% endfor %}
+  </div>
+{% endif %}

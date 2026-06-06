@@ -1,0 +1,56 @@
+---
+layout: default
+---
+
+{% include base_path %}
+
+{% if page.url != "/" and site.breadcrumbs %}
+  {% unless paginator %}
+    {% include breadcrumbs.html %}
+  {% endunless %}
+{% endif %}
+
+{% assign topic_key = page.topic_key %}
+{% assign topic_meta = site.data.research_topics[topic_key] %}
+{% assign topic_color = topic_meta.color | default: "#4A7C9B" %}
+{% assign topic_projects = site.research_projects | sort: "title" %}
+
+<div id="main" role="main">
+  {% include sidebar.html %}
+
+  <div class="archive research-topic-page">
+    <header
+      class="research-topic-header"
+      style="--topic-color: {{ topic_color }};">
+      <h1 class="research-topic-header__title">{{ page.title }}</h1>
+    </header>
+
+    <div class="research-topic-body">
+      {{ content }}
+    </div>
+
+    {% assign has_projects = false %}
+    {% for project in topic_projects %}
+      {% if project.topics contains topic_key %}
+        {% assign has_projects = true %}
+      {% endif %}
+    {% endfor %}
+
+    {% if has_projects %}
+      <section class="research-section">
+        <h2 class="research-section__heading">Projects</h2>
+        <div class="software-grid">
+          {% for project in topic_projects %}
+            {% if project.topics contains topic_key %}
+              {% assign post = project %}
+              {% include archive-single-research-project.html %}
+            {% endif %}
+          {% endfor %}
+        </div>
+      </section>
+    {% endif %}
+
+    {% include research-related-items.html topic_key=topic_key type="publications" heading="Publications" %}
+    {% include research-related-items.html topic_key=topic_key type="talks" heading="Talks" %}
+  </div>
+</div>

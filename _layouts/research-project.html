@@ -1,0 +1,32 @@
+---
+layout: default
+---
+
+{% include base_path %}
+
+{% if page.url != "/" and site.breadcrumbs %}
+  {% unless paginator %}
+    {% include breadcrumbs.html %}
+  {% endunless %}
+{% endif %}
+
+<div id="main" role="main">
+  {% include sidebar.html %}
+
+  <div class="archive research-project-page">
+    <header class="research-project-header">
+      <h1 class="page__title research-project-header__title">{{ page.title }}</h1>
+      {% include research-topic-badges.html topics=page.topics link_to_topics=true detail=true %}
+      {% if page.status %}
+        <p class="research-project-header__status">{{ page.status }}</p>
+      {% endif %}
+    </header>
+
+    <div class="research-project-body">
+      {{ content }}
+    </div>
+
+    {% include research-related-items.html project_topics=page.topics type="publications" heading="Publications" %}
+    {% include research-related-items.html project_topics=page.topics type="talks" heading="Talks" %}
+  </div>
+</div>

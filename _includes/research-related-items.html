@@ -1,0 +1,51 @@
+{% include base_path %}
+
+{% assign item_type = include.type | default: "publications" %}
+{% if item_type == "talks" %}
+  {% assign items = site.talks %}
+{% else %}
+  {% assign items = site.publications %}
+{% endif %}
+
+{% assign has_matches = false %}
+{% for item in items %}
+  {% if item.research_topics %}
+    {% if include.topic_key %}
+      {% if item.research_topics contains include.topic_key %}
+        {% assign has_matches = true %}
+      {% endif %}
+    {% elsif include.project_topics %}
+      {% for slug in include.project_topics %}
+        {% if item.research_topics contains slug %}
+          {% assign has_matches = true %}
+        {% endif %}
+      {% endfor %}
+    {% endif %}
+  {% endif %}
+{% endfor %}
+
+{% if has_matches %}
+  <section class="research-section">
+    <h2 class="research-section__heading">{{ include.heading }}</h2>
+    <div class="software-grid">
+      {% for item in items %}
+        {% assign show_item = false %}
+        {% if item.research_topics %}
+          {% if include.topic_key and item.research_topics contains include.topic_key %}
+            {% assign show_item = true %}
+          {% elsif include.project_topics %}
+            {% for slug in include.project_topics %}
+              {% if item.research_topics contains slug %}
+                {% assign show_item = true %}
+              {% endif %}
+            {% endfor %}
+          {% endif %}
+        {% endif %}
+        {% if show_item %}
+          {% assign post = item %}
+          {% include archive-single-tile.html %}
+        {% endif %}
+      {% endfor %}
+    </div>
+  </section>
+{% endif %}

@@ -1,0 +1,9 @@
+mixed-phased-clouds:
+  title: "Mixed-Phased Clouds"
+  color: "#4A7C9B"
+submesoscale-ocean-turbulence:
+  title: "Submesoscale Ocean Turbulence"
+  color: "#2A9D8F"
+gcm-error-correction:
+  title: "GCM Error Correction"
+  color: "#8B6BB8"

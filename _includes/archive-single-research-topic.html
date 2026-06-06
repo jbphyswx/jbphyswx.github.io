@@ -1,0 +1,22 @@
+{% include base_path %}
+
+{% if post.id %}
+  {% assign title = post.title | markdownify | remove: "<p>" | remove: "</p>" %}
+{% else %}
+  {% assign title = post.title %}
+{% endif %}
+
+{% assign topic_meta = site.data.research_topics[post.topic_key] %}
+{% assign topic_color = topic_meta.color | default: "#4A7C9B" %}
+
+<div class="research-topic-tile" style="--topic-color: {{ topic_color }};">
+  <article class="research-topic-tile__inner">
+    <h2 class="research-topic-tile__title">
+      <a href="{{ base_path }}{{ post.url }}" rel="permalink">{{ title }}</a>
+    </h2>
+
+    {% if post.excerpt %}
+      <p class="research-topic-tile__excerpt">{{ post.excerpt | markdownify | remove: '<p>' | remove: '</p>' }}</p>
+    {% endif %}
+  </article>
+</div>
