@@ -1,23 +1,36 @@
-# main links links
+# Header navigation
 main:
-  - title: "Publications"
-    url: /publications/
-
-  - title: "Talks"
-    url: /talks/    
-
-  - title: "Teaching"
-    url: /teaching/    
-    
   - title: "Software"
     url: /software/
     dropdown_collection: software
-        
+
+  - title: "Resources"
+    url: /resources/
+    dropdown_collection: resource_categories
+
   - title: "Blog Posts"
     url: /year-archive/
-    
-  - title: "CV"
-    url: /cv/
-    
+
   - title: "Guide"
     url: /markdown/
+
+# Sidebar navigation
+sidebar:
+  - title: "CV"
+    url: /cv/
+    icon: "fa-file-alt"
+
+  - title: "Publications"
+    url: /publications/
+    collection: publications
+    icon: "fa-book-open"
+
+  - title: "Talks"
+    url: /talks/
+    collection: talks
+    icon: "fa-microphone"
+
+  - title: "Teaching"
+    url: /teaching/
+    collection: teaching
+    icon: "fa-chalkboard-teacher"

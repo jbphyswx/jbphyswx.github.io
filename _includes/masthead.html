@@ -31,37 +31,49 @@
   <div class="masthead__inner-wrap">
     <div class="masthead__menu">
       <nav id="site-nav" class="greedy-nav">
-        {% unless logo_path == empty %}
-          <a class="site-logo" href="{{ '/' | relative_url }}"><img src="{{ logo_path | relative_url }}" alt="{{ site.masthead_title | default: site.title }}"></a>
-        {% endunless %}
-        <a class="site-title" href="{{ '/' | relative_url }}">
-          {{ site.masthead_title | default: site.title }}
-          {% if site.subtitle %}<span class="site-subtitle">{{ site.subtitle }}</span>{% endif %}
-        </a>
+        <div class="greedy-nav__brand">
+          {% unless logo_path == empty %}
+            <a class="site-logo" href="{{ '/' | relative_url }}"><img src="{{ logo_path | relative_url }}" alt="{{ site.masthead_title | default: site.title }}"></a>
+          {% endunless %}
+          <a class="site-title" href="{{ '/' | relative_url }}">
+            {{ site.masthead_title | default: site.title }}
+            {% if site.subtitle %}<span class="site-subtitle">{{ site.subtitle }}</span>{% endif %}
+          </a>
+        </div>
         <ul class="visible-links">
           {%- for link in site.data.navigation.main -%}
             {%- assign has_dropdown = false -%}
-            {%- if link.dropdown_collection == 'software' and site.software.size > 0 -%}
-              {%- assign has_dropdown = true -%}
-              {%- assign dropdown_items = site.software | sort: 'title' -%}
+            {%- if link.dropdown_collection -%}
+              {%- assign dropdown_items = site[link.dropdown_collection] | sort: 'title' -%}
+              {%- if dropdown_items.size > 0 -%}
+                {%- assign has_dropdown = true -%}
+              {%- endif -%}
             {%- elsif link.children -%}
               {%- assign has_dropdown = true -%}
               {%- assign dropdown_items = link.children -%}
             {%- endif -%}
-            <li class="masthead__menu-item{% if has_dropdown %} masthead__menu-item--dropdown{% endif %}">
-              <a href="{{ link.url | relative_url }}"{% if link.description %} title="{{ link.description }}"{% endif %}>{{ link.title }}</a>
+            {%- assign nav_active = false -%}
+            {%- if page.url == link.url -%}
+              {%- assign nav_active = true -%}
+            {%- elsif link.dropdown_collection and page.collection == link.dropdown_collection -%}
+              {%- assign nav_active = true -%}
+            {%- elsif link.url == '/resources/' and page.collection == 'resources' -%}
+              {%- assign nav_active = true -%}
+            {%- elsif page.collection == 'posts' and link.url == '/year-archive/' -%}
+              {%- assign nav_active = true -%}
+            {%- elsif link.url != '/' and page.url contains link.url -%}
+              {%- assign nav_active = true -%}
+            {%- endif -%}
+            <li class="masthead__menu-item{% if has_dropdown %} masthead__menu-item--dropdown{% endif %}{% if nav_active %} masthead__menu-item--active{% endif %}">
+              <a href="{{ link.url | relative_url }}"{% if link.description %} title="{{ link.description }}"{% endif %}{% if page.url == link.url %} aria-current="page"{% endif %}>{{ link.title }}</a>
               {%- if has_dropdown -%}
                 <ul class="nav-dropdown">
                   <li class="nav-dropdown__all">
                     <a href="{{ link.url | relative_url }}">All {{ link.title | downcase }}</a>
                   </li>
                   {%- for item in dropdown_items -%}
-                    <li>
-                      {%- if link.dropdown_collection == 'software' -%}
-                        <a href="{{ item.repo | default: item.url | relative_url }}"{% if item.repo %} target="_blank" rel="noopener noreferrer"{% endif %}>{{ item.title }}</a>
-                      {%- else -%}
-                        <a href="{{ item.url | relative_url }}">{{ item.title }}</a>
-                      {%- endif -%}
+                    <li{% if page.url == item.url %} class="nav-dropdown__item--active"{% endif %}>
+                      <a href="{{ item.url | relative_url }}"{% if page.url == item.url %} aria-current="page"{% endif %}>{{ item.title }}</a>
                     </li>
                   {%- endfor -%}
                 </ul>
@@ -69,19 +81,21 @@
             </li>
           {%- endfor -%}
         </ul>
-        {% if site.minimal_mistakes_skin2 %}
-          <i class="fas fa-fw fa-adjust" aria-hidden="true" onclick="node1=document.getElementById('theme_source');node2=document.getElementById('theme_source_2');if(node1.getAttribute('rel')=='stylesheet'){node1.setAttribute('rel', 'stylesheet alternate'); node2.setAttribute('rel', 'stylesheet');sessionStorage.setItem('theme', 'dark');}else{node2.setAttribute('rel', 'stylesheet alternate'); node1.setAttribute('rel', 'stylesheet');sessionStorage.setItem('theme', 'light');} return false;"></i>
-        {% endif %}
-        {% if site.search == true %}
-        <button class="search__toggle" type="button">
-          <span class="visually-hidden">{{ site.data.ui-text[site.locale].search_label | default: "Toggle search" }}</span>
-          <i class="fas fa-search"></i>
-        </button>
-        {% endif %}
-        <button class="greedy-nav__toggle hidden" type="button">
-          <span class="visually-hidden">{{ site.data.ui-text[site.locale].menu_label | default: "Toggle menu" }}</span>
-          <div class="navicon"></div>
-        </button>
+        <div class="greedy-nav__actions">
+          {% if site.minimal_mistakes_skin2 %}
+            <i class="fas fa-fw fa-adjust" aria-hidden="true" onclick="node1=document.getElementById('theme_source');node2=document.getElementById('theme_source_2');if(node1.getAttribute('rel')=='stylesheet'){node1.setAttribute('rel', 'stylesheet alternate'); node2.setAttribute('rel', 'stylesheet');sessionStorage.setItem('theme', 'dark');}else{node2.setAttribute('rel', 'stylesheet alternate'); node1.setAttribute('rel', 'stylesheet');sessionStorage.setItem('theme', 'light');} return false;"></i>
+          {% endif %}
+          {% if site.search == true %}
+          <button class="search__toggle" type="button">
+            <span class="visually-hidden">{{ site.data.ui-text[site.locale].search_label | default: "Toggle search" }}</span>
+            <i class="fas fa-search"></i>
+          </button>
+          {% endif %}
+          <button class="greedy-nav__toggle hidden" type="button">
+            <span class="visually-hidden">{{ site.data.ui-text[site.locale].menu_label | default: "Toggle menu" }}</span>
+            <div class="navicon"></div>
+          </button>
+        </div>
         <ul class="hidden-links hidden"></ul>
       </nav>
     </div>
