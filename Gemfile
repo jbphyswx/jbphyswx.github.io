@@ -1,5 +1,8 @@
 source "https://rubygems.org"
 
+# Required on Ruby 3.4+ where bigdecimal is no longer a default gem
+gem "bigdecimal"
+
 # Jekyll 4 with GitHub Pages support via remote theme
 gem "jekyll", "~> 4.3"
 gem "jekyll-remote-theme"
