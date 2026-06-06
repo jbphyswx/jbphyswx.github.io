@@ -1,8 +1,8 @@
 ---
-# Alternate theme CSS - not currently used
-search: false
+# Only the main Sass file needs front matter (the dashes are enough)
 ---
 
 @charset "utf-8";
 
-/* Remote theme styles loaded via layout includes */
+@import "minimal-mistakes/skins/{{ site.minimal_mistakes_skin2 | default: 'default' }}"; // skin
+@import "minimal-mistakes"; // main partials

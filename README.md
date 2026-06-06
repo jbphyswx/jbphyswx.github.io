@@ -42,3 +42,7 @@ This is a Jekyll site hosted on GitHub Pages using the [Minimal Mistakes](https:
 - [Minimal Mistakes Theme](https://mmistakes.github.io/minimal-mistakes/) - Actively maintained Jekyll theme
 - [AcademicPages](https://github.com/academicpages/academicpages.github.io) - Original template this was forked from
 - [al-folio](https://github.com/alshedivat/al-folio) - Alternative academic portfolio template
+- [astro](https://github.com/withastro/astro)
+- [Hugo, HugoBlox](https://github.com/HugoBlox/hugo-theme-academic-cv), https://github.com/HugoBlox/kit
+- https://github.com/sbryngelson/academic-website-template [and https://ethan-pickering.github.io/aboutwebsite.html]
+
