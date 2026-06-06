@@ -6,11 +6,11 @@
 # `jekyll serve`. If you change this file, please restart the server process.
 
 # Site Settings
-locale                   : "en-US"
-title                    : Jordan Benjamin / Jordan's site"
-title_separator          : "-"
-name                     : &name "Jordan Benjamin"
-description              : &description "PhD Student & Climate Scientist"
+locale: "en-US"
+title: "Jordan Benjamin / Jordan's site"
+title_separator: "-"
+name: "Jordan Benjamin"
+description: "PhD Student & Climate Scientist"
 url                      : https://jbphyswx.github.io # the base hostname & protocol for your site e.g. "https://mmistakes.github.io"
 baseurl                  : "" # the subpath of your site, e.g. "/blog"
 repository               : "jbphyswx/jbphyswx.github.io"
@@ -58,7 +58,7 @@ yandex_site_verification :
 
 # Social Sharing
 twitter:
-  username               : &JBstormz
+  username: "jbstormz"
 facebook:
   username               :
   app_id                 :
@@ -189,17 +189,12 @@ collections:
     output: true
     permalink: /:collection/:path/
     
-# Theme (none of these work, i know we added some manually in skins but can't find any way to use the ones we added...)
-# theme: "slate"
-# theme: slate
+# Remote theme - using Minimal Mistakes with a local remote
+remote_theme: mmistakes/minimal-mistakes@4.24.0
+minimal_mistakes_skin: "dark"  # Options: air, aqua, contrast, dark, dirt, neon, mint, plum, sunrise
 
-# plugins:
-#   - jekyll-remote-theme
-# remote_theme           : "mmistakes/minimal-mistakes"
-# minimal_mistakes_skin    : "dark" # "air", "aqua", "contrast", "dark", "dirt", "neon", "mint", "plum", "sunrise"
-
-minimal_mistakes_skin: "default"
-minimal_mistakes_skin2: "dark"
+plugins:
+  - jekyll-include-cache
 
 # Defaults
 defaults:
@@ -272,19 +267,11 @@ timezone: America/Los_Angeles # http://en.wikipedia.org/wiki/List_of_tz_database
 
 # Plugins
 plugins:
-  - jekyll-paginate
-  - jekyll-sitemap
-  - jekyll-gist
   - jekyll-feed
-  - jekyll-redirect-from
+  - jekyll-sitemap
   - jekyll-include-cache
-# mimic GitHub Pages with --safe
-whitelist:
+  - jekyll-seo-tag
   - jekyll-paginate
-  - jekyll-sitemap
-  - jekyll-gist
-  - jekyll-feed
-  - jemoji
 
 
 # Archives

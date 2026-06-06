@@ -1,0 +1,20 @@
+name: Jekyll Build
+
+on:
+  push:
+    branches:
+      - main
+      - modernize/jekyll-stack
+  pull_request:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: 3.1.4
+          bundler-cache: true
+      - run: bundle install
+      - run: bundle exec jekyll build
