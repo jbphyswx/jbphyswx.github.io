@@ -1,3 +1,7 @@
+- date: 2026-09-05
+  title: "Station climate snapshot"
+  text: "Added a static GHCN high/low versus climatology page computed on GCP, then saved into the site so it still works after the cloud project is deleted."
+
 - date: 2026-06-05
   title: "Research section preview"
   text: "Added research topics, project tiles, and placeholder pages to preview the new layout."

@@ -35,3 +35,7 @@ sidebar:
     url: /teaching/
     collection: teaching
     icon: "fa-chalkboard-teacher"
+
+  - title: "Climate snapshot"
+    url: /climate-metrics/
+    icon: "fa-temperature-high"

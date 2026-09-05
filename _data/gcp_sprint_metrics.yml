@@ -1,0 +1,93 @@
+generated_at: '2026-09-05T14:27:16Z'
+source: BigQuery public dataset bigquery-public-data.ghcn_d
+project: jbphyswx-gcp-sprint
+bytes_processed: 37028517426
+bytes_billed: 37029412864
+note: "1991\u20132020 day-of-year climatology vs last ~21 days of TMAX/TMIN. Computed\
+  \ on GCP; this file is a static snapshot so the page survives teardown."
+stations:
+- id: USW00013874
+  name: ATLANTA HARTSFIELD-JACKSON INT
+  state: GA
+  latitude: 33.6297
+  longitude: -84.4422
+  latest:
+    date: '2026-09-01'
+    tmax_c: 34.4
+    tmax_clim_c: 30.59
+    tmax_anomaly_c: 3.81
+    tmin_c: 24.4
+    tmin_clim_c: 21.11
+    tmin_anomaly_c: 3.29
+  n_obs: 36
+- id: USW00094846
+  name: CHICAGO OHARE INTL AP
+  state: IL
+  latitude: 41.9603
+  longitude: -87.9317
+  latest:
+    date: '2026-09-01'
+    tmax_c: 35.0
+    tmax_clim_c: 26.74
+    tmax_anomaly_c: 8.26
+    tmin_c: 25.0
+    tmin_clim_c: 15.97
+    tmin_anomaly_c: 9.03
+  n_obs: 36
+- id: USW00012960
+  name: HOUSTON INTERCONTINENTAL AP
+  state: TX
+  latitude: 29.9844
+  longitude: -95.3608
+  latest:
+    date: '2026-09-01'
+    tmax_c: 31.1
+    tmax_clim_c: 33.69
+    tmax_anomaly_c: -2.59
+    tmin_c: 25.0
+    tmin_clim_c: 23.37
+    tmin_anomaly_c: 1.63
+  n_obs: 36
+- id: USW00023174
+  name: LOS ANGELES INTL AP
+  state: CA
+  latitude: 33.9381
+  longitude: -118.3867
+  latest:
+    date: '2026-09-01'
+    tmax_c: 24.4
+    tmax_clim_c: 26.03
+    tmax_anomaly_c: -1.63
+    tmin_c: 18.9
+    tmin_clim_c: 18.72
+    tmin_anomaly_c: 0.18
+  n_obs: 36
+- id: USW00094728
+  name: NY CITY CNTRL PARK
+  state: NY
+  latitude: 40.7789
+  longitude: -73.9692
+  latest:
+    date: '2026-09-01'
+    tmax_c: 27.8
+    tmax_clim_c: 27.22
+    tmax_anomaly_c: 0.58
+    tmin_c: 19.4
+    tmin_clim_c: 19.22
+    tmin_anomaly_c: 0.18
+  n_obs: 36
+- id: USW00024233
+  name: SEATTLE TACOMA AP
+  state: WA
+  latitude: 47.4447
+  longitude: -122.3144
+  latest:
+    date: '2026-09-01'
+    tmax_c: 18.9
+    tmax_clim_c: 23.23
+    tmax_anomaly_c: -4.33
+    tmin_c: 13.9
+    tmin_clim_c: 13.08
+    tmin_anomaly_c: 0.82
+  n_obs: 36
+
